@@ -1,7 +1,7 @@
 package in.srain.cube.views.ptr;
 
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
