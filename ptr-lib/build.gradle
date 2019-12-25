@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 26
+        minSdkVersion 14
+        targetSdkVersion 28
     }
 
     lintOptions {
@@ -28,4 +28,5 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:design:28.0.0'
 }
