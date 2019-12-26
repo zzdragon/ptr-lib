@@ -21,14 +21,8 @@ public abstract class PtrDefaultHandler implements PtrHandler {
                 View firstVisibleView = manager.getChildAt(0);
                 if (firstVisibleView == null) return false;
                 int firstVisibleViewPosition = manager.getPosition(firstVisibleView);
-                int maxTopPadding = 0;
-                for (int i = 0; i < ((RecyclerView) view).getItemDecorationCount(); i++) {
-                    RecyclerView.ItemDecoration itemDecoration = ((RecyclerView) view).getItemDecorationAt(i);
-                    Rect outRect = new Rect();
-                    itemDecoration.getItemOffsets(outRect, firstVisibleViewPosition, (RecyclerView) view);
-                    maxTopPadding = Math.max(maxTopPadding, outRect.top);
-                }
-                return firstVisibleViewPosition > 0 || firstVisibleView.getTop() + maxTopPadding < view.getPaddingTop();
+                int firstVisibleViewTop = manager.getDecoratedTop(firstVisibleView);
+                return firstVisibleViewPosition > 0 || firstVisibleViewTop < view.getPaddingTop();
             } else {
                 return true;
             }
