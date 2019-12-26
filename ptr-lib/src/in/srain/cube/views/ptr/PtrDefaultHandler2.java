@@ -1,10 +1,10 @@
 package in.srain.cube.views.ptr;
 
-import android.graphics.Rect;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ScrollView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class PtrDefaultHandler2 extends PtrDefaultHandler implements PtrHandler2 {
 
@@ -28,14 +28,8 @@ public abstract class PtrDefaultHandler2 extends PtrDefaultHandler implements Pt
                 View lastVisibleView = manager.getChildAt(((RecyclerView) view).getChildCount() - 1);
                 if (lastVisibleView == null) return false;
                 int lastVisibleViewPosition = manager.getPosition(lastVisibleView);
-                int maxBottomPadding = 0;
-                for (int i = 0; i < ((RecyclerView) view).getItemDecorationCount(); i++) {
-                    RecyclerView.ItemDecoration itemDecoration = ((RecyclerView) view).getItemDecorationAt(i);
-                    Rect outRect = new Rect();
-                    itemDecoration.getItemOffsets(outRect, lastVisibleViewPosition, (RecyclerView) view);
-                    maxBottomPadding = Math.max(maxBottomPadding, outRect.bottom);
-                }
-                return lastVisibleViewPosition < manager.getChildCount() - 1 || lastVisibleView.getBottom() + maxBottomPadding > view.getPaddingBottom();
+                int lastVisibleViewBottom = manager.getDecoratedBottom(lastVisibleView);
+                return lastVisibleViewPosition < manager.getChildCount() - 1 || lastVisibleViewBottom > view.getHeight() - view.getPaddingBottom();
             } else {
                 return true;
             }
